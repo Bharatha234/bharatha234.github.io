@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <meta name="description" content="Personal portfolio with About, Projects, and Resume" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+            display: ['Poppins', 'Inter', 'sans-serif']
+          },
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(0,0,0,0.08)'
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+            slideUp: { '0%': { transform: 'translateY(20px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+            slideIn: { '0%': { transform: 'translateX(-20px)', opacity: 0 }, '100%': { transform: 'translateX(0)', opacity: 1 } }
+          },
+          animation: {
+            fadeIn: 'fadeIn .8s ease-out both',
+            slideUp: 'slideUp .8s ease-out both',
+            slideIn: 'slideIn .8s ease-out both'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom utilities layered on top of Tailwind */
+    .container-pad { @apply px-4 sm:px-6 lg:px-8; }
+    .card { @apply bg-white/80 backdrop-blur border border-slate-200 rounded-2xl shadow-soft; }
+    .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition transform active:scale-95; }
+    .btn-primary { @apply bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400; }
+    .btn-ghost { @apply bg-white text-slate-700 hover:bg-slate-50 border border-slate-200; }
+    .link { @apply text-primary-700 hover:text-primary-800 underline underline-offset-4; }
+    .nav-link { @apply text-slate-600 hover:text-slate-900 transition; }
+    /* Dialog fallback overlay */
+    dialog::backdrop { background: rgba(15,23,42,.6); }
+    .backdrop-fixed { position: fixed; inset: 0; background: rgba(15,23,42,.6); }
+  </style>
+</head>
+<body class="antialiased bg-gradient-to-b from-white to-slate-50 text-slate-800">
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <nav class="container-pad max-w-6xl mx-auto flex items-center justify-between py-3">
+      <a href="#home" class="flex items-center gap-2">
+        <div class="h-9 w-9 rounded-xl bg-primary-600 grid place-items-center text-white font-bold">Bharath</div>
+        <span class="font-display text-lg">My Portfolio</span>
+      </a>
+      <button id="navToggle" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Open menu">
+        <!-- Hamburger -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+      <ul id="navMenu" class="hidden md:flex items-center gap-6">
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#resume">Resume</a></li>
+      </ul>
+    </nav>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200">
+      <ul class="container-pad max-w-6xl mx-auto py-3 grid gap-3">
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#resume">Resume</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero / About -->
+  <section id="home" class="container-pad max-w-6xl mx-auto pt-12 sm:pt-16 lg:pt-24 pb-12 lg:pb-24">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div class="order-2 lg:order-1 animate-slideIn">
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900">Hi, I'm <span class="text-primary-700">T BharathaSimha Reddy</span></h1>
+        <p class="mt-4 text-slate-600 text-lg leading-relaxed">Hi, I’m a developer who loves turning data into delightful products. I specialize in Python, Machine Learning, Django, modern front-end tools, and Data Science — check out my projects below and grab my resume if you’d like to know more</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#resume" class="btn btn-ghost">View Resume</a>
+        </div>
+        <div class="mt-6 text-sm text-slate-500 flex items-center gap-2">
+          <span id="emailText">bharathasimhareddy2340@gmail.com</span>
+          <button id="copyEmail" class="p-2 rounded-lg hover:bg-slate-100" aria-label="Copy email to clipboard" title="Copy email">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><rect width="10" height="10" x="10" y="10" rx="2"/></svg>
+          </button>
+          <span id="copyToast" class="hidden text-primary-700">Copied!</span>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2 flex justify-center lg:justify-end animate-fadeIn">
+        <div class="relative">
+          <img src="images\bio-pic.jpeg" alt="Professional headshot" class="w-48 h-48 sm:w-60 sm:h-60 lg:w-72 lg:h-72 object-cover rounded-3xl shadow-soft border border-slate-200" />
+          <div class="absolute -bottom-3 -right-3 bg-white rounded-xl px-3 py-1 text-xs shadow-soft border border-slate-200">Open to opportunities</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Projects Section -->
+<section id="projects" class="py-16">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-slate-900 mb-8">Projects</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Project 1 -->
+      <article class="card overflow-hidden group cursor-pointer" 
+        data-project='{
+          "title":"Real-time Facial Expression-Based Music & Movie Recommender",
+          "desc":"A system that detects facial expressions to identify emotions and recommends suitable songs or movies in real-time. Built with Python, ML models, and a recommendation engine.",
+          "link":"https://github.com/Bharatha234/Emosync.git",
+          "image":"images/emosync.jpeg"
+        }'>
+        <div class="aspect-video overflow-hidden">
+          <img class="h-full w-full object-cover transition duration-300 group-hover:scale-105" 
+               src="images/emosync.jpeg" 
+               alt="Facial expression recommender system" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-slate-900">Facial Expression-Based Recommender</h3>
+          <p class="text-slate-600 text-sm mt-1">Music & movie suggestions from emotions.</p>
+          <div class="mt-3 flex items-center gap-2 text-sm text-primary-700 read-more">
+            <span class="underline">Read more</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                 class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="card overflow-hidden group cursor-pointer" 
+        data-project='{
+          "title":"Snake Game with Pygame",
+          "desc":"An interactive Snake game developed in Python using Pygame with OOP principles. Features collision detection, customizable difficulty levels, sound effects, and an optimized game loop for smooth performance.",
+          "link":"https://github.com/Bharatha234/Snake_Game.git",
+          "image":"images/snake-game.jpeg"
+        }'>
+        <div class="aspect-video overflow-hidden">
+          <img class="h-full w-full object-cover transition duration-300 group-hover:scale-105" 
+               src="images/snake-game.jpeg" 
+               alt="Snake game project" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-slate-900">Snake Game with Pygame</h3>
+          <p class="text-slate-600 text-sm mt-1">Classic Snake game built with Python & Pygame.</p>
+          <div class="mt-3 flex items-center gap-2 text-sm text-primary-700 read-more">
+            <span class="underline">Read more</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                 class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="card overflow-hidden group cursor-pointer" 
+        data-project='{
+          "title":"Secure Full-Stack Authentication & Payments System",
+          "desc":"Full-stack authentication system with React, Node.js, Express, and MongoDB. Features email/password login, Google OAuth 2.0, JWT sessions, role-based access, Razorpay UPI integration, and a personalized dashboard.",
+          "link":"https://github.com/Bharatha234/-user-authentication-module.git",
+          "image":"images\reg-log.jpeg"
+        }'>
+        <div class="aspect-video overflow-hidden">
+          <img class="h-full w-full object-cover transition duration-300 group-hover:scale-105" 
+               src="images/reg-log.jpeg" 
+               alt="Authentication system project" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-slate-900">Auth System with Razorpay</h3>
+          <p class="text-slate-600 text-sm mt-1">Secure login, OAuth & payments integration.</p>
+          <div class="mt-3 flex items-center gap-2 text-sm text-primary-700 read-more">
+            <span class="underline">Read more</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                 class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<dialog id="projectDialog" class="rounded-lg shadow-xl w-11/12 max-w-2xl">
+  <div class="bg-white rounded-lg overflow-hidden">
+    <div class="relative aspect-video bg-slate-100">
+      <img id="dialogImage" alt="Project image" class="h-full w-full object-cover" />
+      <button id="dialogClose" class="absolute top-2 right-2 bg-white rounded-full p-2 shadow">✕</button>
+    </div>
+    <div class="p-5">
+      <h3 id="dialogTitle" class="font-display text-xl text-slate-900"></h3>
+      <p id="dialogDesc" class="mt-2 text-slate-600"></p>
+      <div class="mt-4">
+        <a id="dialogLink" href="#" target="_blank" rel="noopener" 
+           class="btn bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg">
+           🔗 Open Project
+        </a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Script -->
+<script>
+  const dialog = document.getElementById("projectDialog");
+  const dialogTitle = document.getElementById("dialogTitle");
+  const dialogDesc = document.getElementById("dialogDesc");
+  const dialogImage = document.getElementById("dialogImage");
+  const dialogLink = document.getElementById("dialogLink");
+  const dialogClose = document.getElementById("dialogClose");
+
+  // Open dialog only on "Read more"
+  document.querySelectorAll('#projects article.card').forEach(card => {
+    const readMore = card.querySelector('.read-more');
+    readMore.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const data = JSON.parse(card.getAttribute('data-project'));
+      dialogTitle.textContent = data.title;
+      dialogDesc.textContent = data.desc;
+      dialogImage.src = data.image;
+      dialogLink.href = data.link;
+      dialog.showModal();
+    });
+  });
+
+  // Close button
+  dialogClose.addEventListener("click", () => {
+    dialog.close();
+  });
+</script>
+
+  <!-- Resume -->
+  <section id="resume" class="container-pad max-w-6xl mx-auto py-12 lg:py-20">
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="font-display text-2xl sm:text-3xl text-slate-900">Resume</h2>
+        <p class="text-slate-600 mt-2">Download a PDF or preview right here.</p>
+        <div class="mt-4 flex gap-3">
+          <!-- Replace href with your actual resume.pdf path -->
+          <a href="resume.pdf" class="btn btn-primary" download>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+            Download PDF
+          </a>
+          <a href="#" class="btn btn-ghost" onclick="document.getElementById('resumePreview').scrollIntoView({behavior:'smooth'}); return false;">Preview below</a>
+        </div>
+        <ul class="mt-6 space-y-2 text-slate-700 text-sm">
+          <li>Building with Python & Django</li>
+          <li>Machine Learning & Data Science</li>
+          <li>Modern Front-End Tooling</li>
+        </ul>
+      </div>
+      <div id="resumePreview" class="card p-4">
+        <!-- Inline PDF preview (shows placeholder if file not found) -->
+        <div class="aspect-[3/4] bg-slate-100 rounded-xl overflow-hidden grid place-items-center">
+          <iframe title="Resume preview" src="resume.pdf" class="w-full h-full" loading="lazy"></iframe>
+          <div class="absolute text-slate-500 text-sm p-4 pointer-events-none"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 py-8">
+    <div class="container-pad max-w-6xl mx-auto text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© <span id="year"></span> T BharathaSimha Reddy. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a class="hover:text-slate-700" href="#home">Back to top</a>
+        <a class="hover:text-slate-700" href="https://github.com/Bharatha234" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.57v-2.18c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.34-5.47-5.98 0-1.32.47-2.39 1.23-3.23-.12-.3-.53-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.48 11.48 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.87.12 3.17.76.84 1.23 1.91 1.23 3.23 0 4.65-2.81 5.67-5.49 5.97.43.37.81 1.1.81 2.22v3.29c0 .31.22.68.82.57A12 12 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a class="hover:text-slate-700" href="https://www.linkedin.com/in/t-bharatha-simha-reddy-18b30b259/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4zM8 8h3.8v2.2h.1C12.6 8.9 14.1 8 16 8c4.3 0 5.1 2.8 5.1 6.4V24h-4v-5.6c0-1.4 0-3.2-2-3.2s-2.3 1.6-2.3 3.1V24H8z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    navToggle?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Smooth in-view animations for sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slideUp');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+    // Copy email to clipboard
+    const copyBtn = document.getElementById('copyEmail');
+    const emailText = document.getElementById('emailText');
+    const toast = document.getElementById('copyToast');
+    copyBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(emailText.textContent.trim());
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 1200);
+      } catch (e) {
+        alert('Copy failed, please copy manually.');
+      }
+    });
+
+    // Project dialog (uses <dialog> with backdrop fallback)
+    const dlg = document.getElementById('projectDialog');
+    const dlgBackdrop = document.getElementById('dialogBackdrop');
+    const dlgTitle = document.getElementById('dialogTitle');
+    const dlgDesc = document.getElementById('dialogDesc');
+    const dlgImage = document.getElementById('dialogImage');
+    const dlgLink = document.getElementById('dialogLink');
+    const dlgClose = document.getElementById('dialogClose');
+
+    function openDialog(data) {
+      dlgTitle.textContent = data.title;
+      dlgDesc.textContent = data.desc;
+      dlgImage.src = data.image;
+      dlgLink.href = data.link;
+
+      if (typeof dlg.showModal === 'function') {
+        dlg.showModal();
+      } else {
+        dlg.open = true;
+        dlgBackdrop.classList.remove('hidden');
+      }
+    }
+
+    function closeDialog() {
+      if (typeof dlg.close === 'function') dlg.close();
+      dlgBackdrop.classList.add('hidden');
+    }
+
+    document.querySelectorAll('#projects article.card').forEach(card => {
+      card.addEventListener('click', () => {
+        const data = JSON.parse(card.getAttribute('data-project'));
+        openDialog(data);
+      });
+    });
+
+    dlgClose?.addEventListener('click', closeDialog);
+    dlg?.addEventListener('click', (e) => {
+      const rect = dlg.getBoundingClientRect();
+      const clickInDialog = rect.top <= e.clientY && e.clientY <= rect.top + rect.height && rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!clickInDialog) closeDialog();
+    });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDialog(); });
+  </script>
+</body>
+</html>
